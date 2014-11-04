@@ -22,16 +22,11 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # media_profiles and media_codecs xmls for 8916
 PRODUCT_COPY_FILES += \
-    device/huawei/c8816/media/media_profiles.xml:system/etc/media_profiles.xml \
-    device/huawei/c8816/media/media_codecs.xml:system/etc/media_codecs.xml
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml
 	
 PRODUCT_COPY_FILES += \
-    device/huawei/c8816/prebuilt/system/etc/whitelist_appops.xml:system/etc/whitelist_appops.xml
-	
-# Logmask
-PRODUCT_COPY_FILES += \
-    device/huawei/c8816/prebuilt/system/etc/logmask/kernelevent.cfg:system/etc/logmask/kernelevent.cfg \
-    device/huawei/c8816/prebuilt/system/etc/logmask/wifi.cfg:system/etc/logmask/wifi.cfg 
+    $(LOCAL_PATH)/configs/whitelist_appops.xml:system/etc/whitelist_appops.xml
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
@@ -49,7 +44,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     qcmediaplayer
 
-PRODUCT_BOOT_JARS += qcmediaplayer
+PRODUCT_BOOT_JARS += qcmediaplayer:oem-services:qcom.fmradio:org.codeaurora.Performanc
 	
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -75,6 +70,10 @@ PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+
+# Sensors feature definition file/s
+PRODUCT_COPY_FILES += \
+   frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal hdpi
@@ -103,8 +102,7 @@ PRODUCT_PACKAGES += \
     power.msm8610 \
     liboverlay
 
-#  libqcomvisualizer \
-# libqcomvoiceprocessing
+
 # ANT+ stack
 PRODUCT_PACKAGES += \
     AntHalService \
@@ -113,27 +111,30 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audiod \
+    audio_policy.msm8610 \
+    audio.primary.msm8610 \
     audio.a2dp.default \
-    audio.usb.default \
     audio.r_submix.default \
-    audio.primary.msm8916 \
-    audio_policy.msm8916 \
-    libaudio-resampler
+    audio.usb.default \
+    libaudio-resampler \
+    libqcomvisualizer \
+    libqcomvoiceprocessing
 
 # Audio configuration file
 PRODUCT_COPY_FILES += \
-    device/huawei/c8816/prebuilt/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/prebuilt/system/vendor/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-	device/huawei/c8816/prebuilt/system/etc/globalAutoAdapt-conf.xml:system/etc/globalAutoAdapt-conf.xml
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	 $(LOCAL_PATH)/prebuilt/system/etc/globalAutoAdapt-conf.xml:system/etc/globalAutoAdapt-conf.xml
 
 #wifi
 PRODUCT_COPY_FILES += \
-    device/huawei/c8816/prebuilt/system/etc/firmware/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-    device/huawei/c8816/prebuilt/system/etc/firmware/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin \
-    device/huawei/c8816/prebuilt/system/etc/firmware/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/huawei/c8816/prebuilt/system/etc/firmware/wpa_supplicant_ath6kl.conf:system/etc/wifi/wpa_supplicant_ath6kl.conf \
-    device/huawei/c8816/prebuilt/system/etc/firmware/wpa_supplicant_wcn.conf:system/etc/wifi/wpa_supplicant_wcn.conf 
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin \
+    $(LOCAL_PATH)/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_ath6kl.conf:system/etc/wifi/wpa_supplicant_ath6kl.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_wcn.conf:system/etc/wifi/wpa_supplicant_wcn.conf
+
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -179,19 +180,12 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8610
-	
 
-# Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8610
 
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8610
 
-# Misc
-PRODUCT_PACKAGES += \
-    libxml2
 
 #OEM Services library
 PRODUCT_PACKAGES += \
@@ -215,11 +209,6 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
-
-# Random
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
 	
 # Prebuilt binary
 PRODUCT_PACKAGES += \
@@ -237,7 +226,6 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8916 \
     libcalmodule_akm \
     calmodule.cfg
 
@@ -293,10 +281,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,device/huawei/c8816/prebuilt/system,system)
 
+# Random
+PRODUCT_PACKAGES += \
+    qrngd \
+    qrngp
+
 # Wifi
 PRODUCT_PACKAGES += \
-    libcurl \
-    wcnss_service
+    libQWiFiSoftApCfg \
+	 wcnss_service
 
 # Properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -315,6 +308,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mass_storage
+
+# Enable strict operation
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.strict_op_enable=false
 
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
