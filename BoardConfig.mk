@@ -39,9 +39,9 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 
 # Inline kernel building
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-TARGET_KERNEL_SOURCE := kernel/huawei/c8816
-TARGET_KERNEL_CONFIG := c8816_defconfig
+#TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+#TARGET_KERNEL_SOURCE := kernel/huawei/c8816
+#TARGET_KERNEL_CONFIG := c8816_defconfig
 BOARD_CUSTOM_BOOTIMG_MK := device/huawei/c8816/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37
 BOARD_KERNEL_BASE := 0x00000000
@@ -139,13 +139,6 @@ BOARD_RECOVERY_SWIPE := true
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
 
-# # Encryption
-#TARGET_HW_DISK_ENCRYPTION := true
-
-# Init
-TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_c8816.c
-TARGET_UNIFIED_DEVICE := true
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
@@ -156,7 +149,6 @@ TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
 BOARD_HAS_QCOM_WLAN_SDK := true
-TARGET_USES_WCNSS_CTRL := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
@@ -164,6 +156,8 @@ BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_FW_PATH_AP := "ap"
 BOARD_WLAN_DEVICE := qcwcn
 
 

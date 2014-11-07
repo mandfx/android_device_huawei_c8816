@@ -43,7 +43,12 @@ persist.cne.feature=0
 # system prop for override memlimit to enable cne
 persist.cne.override.memlimit=1
 
-
+ro.bluetooth.remote.autoconnect=true
+ro.bluetooth.request.master=true
+ro.bt.bdaddr_path=/data/misc/bluedroid/bdaddr
+ro.qualcomm.bluetooth.ftp=true
+ro.sf.lcd_density=240
+ro.qualcomm.bluetooth.sap=true 
 
 
 #system props for the MM modules

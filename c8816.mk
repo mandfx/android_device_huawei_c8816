@@ -20,7 +20,7 @@ LOCAL_PATH := device/huawei/c8816
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-# media_profiles and media_codecs xmls for 8916
+# media_profiles and media_codecs xmls for 8610
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml
@@ -37,14 +37,14 @@ PRODUCT_COPY_FILES += \
 
 # Pre-Jars
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/cneapiclient.jar:system/framework/cneapiclient.jar \
-	$(LOCAL_PATH)/configs/qcmediaplayer.jar:system/framework/qcmediaplayer.jar
+	$(LOCAL_PATH)/configs/cneapiclient.jar:system/framework/cneapiclient.jar 
 
+#	$(LOCAL_PATH)/configs/qcmediaplayer.jar:system/framework/qcmediaplayer.jar
 # Extended media support
-PRODUCT_PACKAGES += \
-    qcmediaplayer
+#PRODUCT_PACKAGES += \
+#    qcmediaplayer
 
-PRODUCT_BOOT_JARS += qcmediaplayer:oem-services:qcom.fmradio:org.codeaurora.Performanc
+#PRODUCT_BOOT_JARS += qcmediaplayer:oem-services:qcom.fmradio:org.codeaurora.Performanc
 	
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -102,12 +102,6 @@ PRODUCT_PACKAGES += \
     power.msm8610 \
     liboverlay
 
-
-# ANT+ stack
-PRODUCT_PACKAGES += \
-    AntHalService \
-    libantradio \
-    antradio_app
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -186,6 +180,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lights.msm8610
 
+# Camera
+PRODUCT_PACKAGES += \
+	camera.msm8610
+
 
 #OEM Services library
 PRODUCT_PACKAGES += \
@@ -226,6 +224,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
+    sensors.msm8610 \
     libcalmodule_akm \
     calmodule.cfg
 
@@ -236,27 +235,6 @@ PRODUCT_PACKAGES += \
 # Vold
 PRODUCT_PACKAGES += \
     vold.fstab
-
-# Modules
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/modules/adsprpc.ko:system/lib/modules/adsprpc.ko \
-	$(LOCAL_PATH)/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
-	$(LOCAL_PATH)/modules/dma_test.ko:system/lib/modules/dma_test.ko \
-	$(LOCAL_PATH)/modules/evbug.ko:system/lib/modules/evbug.ko \
-	$(LOCAL_PATH)/modules/gpio_axis.ko:system/lib/modules/gpio_axis.ko \
-	$(LOCAL_PATH)/modules/gpio_event.ko:system/lib/modules/gpio_event.ko \
-	$(LOCAL_PATH)/modules/gpio_input.ko:system/lib/modules/gpio_input.ko \
-	$(LOCAL_PATH)/modules/gpio_matrix.ko:system/lib/modules/gpio_matrix.ko\
-	$(LOCAL_PATH)/modules/gpio_output.ko:system/lib/modules/gpio_output.ko \
-	$(LOCAL_PATH)/modules/gspca_main.ko:system/lib/modules/gspca_main.ko \
-	$(LOCAL_PATH)/modules/mmc_test.ko:system/lib/modules/mmc_test.ko \
-	$(LOCAL_PATH)/modules/msm-buspm-dev.ko:system/lib/modules/msm-buspm-dev.ko \
-	$(LOCAL_PATH)/modules/oprofile.ko:system/lib/modules/oprofile.ko \
-	$(LOCAL_PATH)/modules/qcedev.ko:system/lib/modules/qcedev.ko \
-	$(LOCAL_PATH)/modules/qcrypto.ko:system/lib/modules/qcrypto.ko \
-	$(LOCAL_PATH)/modules/radio-iris-transport.ko:system/lib/modules/radio-iris-transport.ko \
-	$(LOCAL_PATH)/modules/reset_modem.ko:system/lib/modules/reset_modem.ko \
-	$(LOCAL_PATH)/modules/spidev.ko:system/lib/modules/spidev.ko 
 
 # Thermald
 PRODUCT_COPY_FILES += \
@@ -288,22 +266,20 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    libcurl \
+    libqsap_sdk \
     libQWiFiSoftApCfg \
 	 wcnss_service
 
-# Properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bluetooth.remote.autoconnect=true \
-    ro.bluetooth.request.master=true \
-    ro.bt.bdaddr_path=/data/misc/bluedroid/bdaddr \
-    ro.qualcomm.bluetooth.ftp=true \
-    ro.qualcomm.bluetooth.sap=true 
+PRODUCT_PACKAGES += \
+    wpa_supplicant_overlay.conf \
+    p2p_supplicant_overlay.conf
+
 
 #wifi
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
-	ro.sys.umsdirtyratio=20 \
-	ro.wifi.channels=
+	ro.sys.umsdirtyratio=20 
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -320,6 +296,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/vendor/lib/libqc-opt.so \
     persist.radio.apm_sim_not_pwdn=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    gsm.version.baseband=01760 
+
 	
 
 $(call inherit-product, build/target/product/full.mk)
@@ -327,3 +307,5 @@ $(call inherit-product, build/target/product/full.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 $(call inherit-product-if-exists, vendor/huawei/c8816/c8816-vendor.mk)
+
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

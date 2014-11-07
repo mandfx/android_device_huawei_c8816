@@ -24,7 +24,9 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-
+# /* to process the usb port switch uevent in charger mode */
+service hw_scsi_switch /sbin/hw_scsi_switch
+    class charger
 on init
     write /sys/class/android_usb/android0/f_rndis/wceis 1
 
