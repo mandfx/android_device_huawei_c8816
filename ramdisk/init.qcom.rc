@@ -29,8 +29,7 @@
 
 import init.qcom.usb.rc
 
-
-service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p8 /dev/block/mmcblk0p9 /dev/block/mmcblk0p10
+service rmt_storage /sbin/rmt_storage /dev/block/mmcblk0p8 /dev/block/mmcblk0p9 /dev/block/mmcblk0p10
     class core
 
 on early-init
@@ -40,6 +39,19 @@ on early-init
     write /sys/kernel/mm/ksm/sleep_millisecs 500
     write /sys/kernel/mm/ksm/run 1
     write /sys/block/zram0/disksize 192M
+    
+on fs
+    mount_all fstab.qcom
+
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/log
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/log /log nosuid nodev barrier=1
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/modem
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
 	
 on init
     # Set permissions for persist partition
@@ -84,7 +96,7 @@ on early-boot
     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
 on boot
-	insmod /system/lib/modules/adsprpc.ko
+    insmod /system/lib/modules/adsprpc.ko
 
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
     write /sys/bus/i2c/drivers/ft5x06_ts/1-0038/update_fw 
@@ -94,35 +106,6 @@ on boot
     write /proc/sys/vm/page-cluster 0
     write /proc/sys/vm/swappiness 100
 
-# Allow writing to the kernel trace log.
-    chmod 0222 /sys/kernel/debug/tracing/trace_marker
-
-# Allow the shell group to enable (some) kernel tracing.
-    chown root shell /sys/kernel/debug/tracing/trace_clock
-    chown root shell /sys/kernel/debug/tracing/buffer_size_kb
-    chown root shell /sys/kernel/debug/tracing/options/overwrite
-    chown root shell /sys/kernel/debug/tracing/events/sched/sched_switch/enable
-    chown root shell /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable
-    chown root shell /sys/kernel/debug/tracing/events/power/cpu_frequency/enable
-    chown root shell /sys/kernel/debug/tracing/events/power/cpu_idle/enable
-    chown root shell /sys/kernel/debug/tracing/events/power/clock_set_rate/enable
-    chown root shell /sys/kernel/debug/tracing/events/cpufreq_interactive/enable
-    chown root shell /sys/kernel/debug/tracing/tracing_on
-
-    chmod 0664 /sys/kernel/debug/tracing/trace_clock
-    chmod 0664 /sys/kernel/debug/tracing/buffer_size_kb
-    chmod 0664 /sys/kernel/debug/tracing/options/overwrite
-    chmod 0664 /sys/kernel/debug/tracing/events/sched/sched_switch/enable
-    chmod 0664 /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable
-    chmod 0664 /sys/kernel/debug/tracing/events/power/cpu_frequency/enable
-    chmod 0664 /sys/kernel/debug/tracing/events/power/cpu_idle/enable
-    chmod 0664 /sys/kernel/debug/tracing/events/power/clock_set_rate/enable
-    chmod 0664 /sys/kernel/debug/tracing/events/cpufreq_interactive/enable
-    chmod 0664 /sys/kernel/debug/tracing/tracing_on
-
-# Allow only the shell group to read and truncate the kernel trace.
-    chown root shell /sys/kernel/debug/tracing/trace
-    chmod 0660 /sys/kernel/debug/tracing/trace
 
 # Modify Permission for accelerometer
     chown system system /dev/accel
@@ -414,17 +397,12 @@ on property:bluetooth.dun.status=stopped
 on property:ro.bluetooth.ftm_enabled=true
     start ftmd
 
-service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
-    class core
+service huaweibasebandinit /system/bin/sh /system/etc/init.huawei.baseband.sh
+    class late_start
     user root
     oneshot
 
-service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
-    class main
-    user root
-    oneshot
-
-service ril-qmi /system/bin/sh /init.qcom.ril.sh
+service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     class main
     user root
     oneshot
@@ -1129,3 +1107,9 @@ service gps_check /system/bin/gps_check
     user root
     group root
     oneshot
+
+the change is to disable SAP
+service gsiff_daemon /system/bin/gsiff_daemon
+   class late_start
+   user system
+   group gps net_raw

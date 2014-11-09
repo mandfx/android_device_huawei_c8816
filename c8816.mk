@@ -39,12 +39,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/cneapiclient.jar:system/framework/cneapiclient.jar 
 
-#	$(LOCAL_PATH)/configs/qcmediaplayer.jar:system/framework/qcmediaplayer.jar
-# Extended media support
-#PRODUCT_PACKAGES += \
-#    qcmediaplayer
-
-#PRODUCT_BOOT_JARS += qcmediaplayer:oem-services:qcom.fmradio:org.codeaurora.Performanc
 	
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -97,7 +91,6 @@ PRODUCT_PACKAGES += \
     copybit.msm8610 \
     gralloc.msm8610 \
     hwcomposer.msm8610 \
-    keystore.msm8610 \
     memtrack.msm8610 \
     power.msm8610 \
     liboverlay
@@ -160,6 +153,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     setup_fs
 
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.msm8610
+
 # FM radio
 PRODUCT_PACKAGES += \
     FM2 \
@@ -205,28 +202,28 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVdecHevc \
     libOmxVenc \
-    libstagefrighthw
+    libstagefrighthw \
+    qcmediaplayer
 
-	
-# Prebuilt binary
-PRODUCT_PACKAGES += \
-    chargelog.sh \
-    e2fsck_s \
-    healthd \
-    huawei_version \
-    hw_scsi_switch \
-    libqmi_oem_main \
-    rmt_oeminfo \
-    rmt_storage \
-    test_diag \
-    test_oeminfo \
-    usb_update
+PRODUCT_BOOT_JARS += \
+    qcmediaplayer
+
 
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8610 \
     libcalmodule_akm \
     calmodule.cfg
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    e2fsck \
+    fibmap.f2fs \
+    fsck.f2fs \
+    make_ext4fs \
+    mkfs.f2fs \
+    resize2fs \
+    setup_fs
 
 # USB
 PRODUCT_PACKAGES += \
@@ -266,8 +263,6 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libcurl \
-    libqsap_sdk \
     libQWiFiSoftApCfg \
 	 wcnss_service
 
@@ -298,8 +293,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    gsm.version.baseband=01760 
-
+    gsm.version.baseband=01760 \
+	 ro.config.is_cdma_phone=true \
+	 gsm.national_roaming.apn=46003 \
+    ro.cdma.home.operator.numeric=46003 \
+	 ro.telephony.ril_class=QualcommSharedRIL \
+    ro.config.cdma.globalMode=true 
 	
 
 $(call inherit-product, build/target/product/full.mk)

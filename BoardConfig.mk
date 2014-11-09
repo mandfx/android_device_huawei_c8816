@@ -35,13 +35,12 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
-#TARGET_SPECIFIC_HEADER_PATH += device/huawei/c8816/include
-
+TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Inline kernel building
-#TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-#TARGET_KERNEL_SOURCE := kernel/huawei/c8816
-#TARGET_KERNEL_CONFIG := c8816_defconfig
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+TARGET_KERNEL_SOURCE := kernel/huawei/msm8610
+TARGET_KERNEL_CONFIG := c8816d_defconfig
 BOARD_CUSTOM_BOOTIMG_MK := device/huawei/c8816/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37
 BOARD_KERNEL_BASE := 0x00000000
