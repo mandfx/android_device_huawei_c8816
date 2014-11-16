@@ -155,7 +155,7 @@ PRODUCT_PACKAGES += \
 
 # Keystore
 PRODUCT_PACKAGES += \
-    keystore.msm8610
+    keystore.msm8916
 
 # FM radio
 PRODUCT_PACKAGES += \
@@ -239,9 +239,8 @@ PRODUCT_COPY_FILES += \
     
 # Spn config
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml
-	
-PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml \
+	$(LOCAL_PATH)/configs/cdma_call_conf.xml:system/etc/cdma_call_conf.xml \
 	$(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 	
 # Update-Binary
@@ -263,8 +262,13 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libQWiFiSoftApCfg \
+    libcurl \
 	 wcnss_service
+
+PRODUCT_PACKAGES += \
+    hostapd.accept \
+    hostapd.deny \
+    hostapd_default.conf
 
 PRODUCT_PACKAGES += \
     wpa_supplicant_overlay.conf \

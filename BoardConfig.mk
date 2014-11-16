@@ -39,10 +39,10 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Inline kernel building
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
-TARGET_KERNEL_SOURCE := kernel/huawei/msm8610
+TARGET_KERNEL_SOURCE := kernel/huawei/c8816
 TARGET_KERNEL_CONFIG := c8816d_defconfig
-BOARD_CUSTOM_BOOTIMG_MK := device/huawei/c8816/mkbootimg.mk
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37
+BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 androidboot.selinux=disable
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
@@ -144,6 +144,8 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 25
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
 TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
+
+
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
