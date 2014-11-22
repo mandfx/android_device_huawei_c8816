@@ -20,6 +20,8 @@ LOCAL_PATH := device/huawei/c8816
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
 # media_profiles and media_codecs xmls for 8610
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
@@ -154,8 +156,8 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 # Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8916
+#PRODUCT_PACKAGES += \
+#    keystore.msm8916
 
 # FM radio
 PRODUCT_PACKAGES += \
@@ -262,8 +264,9 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    libcurl \
-	 wcnss_service
+    libQWiFiSoftApCfg \
+    libwcnss_qmi \
+    wcnss_service
 
 PRODUCT_PACKAGES += \
     hostapd.accept \
