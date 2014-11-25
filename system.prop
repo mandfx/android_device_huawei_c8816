@@ -1,5 +1,3 @@
-
-
 # Audio
 ro.qc.sdk.audio.fluencetype=none
 persist.audio.fluence.voicecall=true
@@ -63,17 +61,29 @@ persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
-persist.radio.msgtunnel.start=false
 ro.telephony.default_network=4
 telephony.lteOnCdmaDevice=0
 persist.data_netmgrd_mtu=1460
 ro.telephony.call_ring.multiple=false
+persist.radio.restore_mode_pref=1
+persist.radio.force_nw_search=1
+persist.radio.apns_roaming=true
+persist.radio.msgtunnel.start=false
+persist.radio.atfwd.start=false
+ro.cdma.home.operator.numeric=46003
+gsm.national_roaming.apn=46003
+ro.config.is_cdma_phone=true
+ro.config.cdma.globalMode=true
 
 # Enable DSDS
 #persist.radio.multisim.config = dsds
+#persist.radio.msgtunnel.start=false
+#gsm.version.baseband=01760
+#phony.ril_class=QualcommSharedRIL
 
 # Time services
 persist.timed.enable=true
 
 # Wifi
 wifi.interface=wlan0
+ro.sys.umsdirtyratio=20 

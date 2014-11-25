@@ -258,9 +258,9 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,device/huawei/c8816/prebuilt/system,system)
 
 # Random
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
+#PRODUCT_PACKAGES += \
+#    qrngd \
+#    qrngp
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -278,34 +278,18 @@ PRODUCT_PACKAGES += \
     p2p_supplicant_overlay.conf
 
 
-#wifi
-PRODUCT_PROPERTY_OVERRIDES += \
-	wifi.interface=wlan0 \
-	ro.sys.umsdirtyratio=20 
-
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mass_storage
+	persist.sys.usb.config=mass_storage,adb
 
 # Enable strict operation
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.strict_op_enable=false
-
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.whitelist=/system/etc/whitelist_appops.xml
+    persist.sys.strict_op_enable=false \
+    persist.sys.whitelist=/system/etc/whitelist_appops.xml \
+	 ro.secure=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/vendor/lib/libqc-opt.so \
     persist.radio.apm_sim_not_pwdn=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    gsm.version.baseband=01760 \
-	 ro.config.is_cdma_phone=true \
-	 gsm.national_roaming.apn=46003 \
-    ro.cdma.home.operator.numeric=46003 \
-	 ro.telephony.ril_class=QualcommSharedRIL \
-    ro.config.cdma.globalMode=true 
 	
 
 $(call inherit-product, build/target/product/full.mk)
