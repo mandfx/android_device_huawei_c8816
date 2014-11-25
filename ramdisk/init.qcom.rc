@@ -31,9 +31,8 @@ import init.qcom.usb.rc
 import init.target.rc
 
 on early-init
-    #mount debugfs debugfs /sys/kernel/debug
-    #chown system system /sys/kernel/debug/hw_fmlog/debug_mask
-    #chmod 0660 /sys/kernel/debug/hw_fmlog/debug_mask
+    mount debugfs debugfs /sys/kernel/debug
+
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -145,24 +144,21 @@ on boot
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
     chmod 0640 /dev/radio0
-    #Create QMUX deamon socket area in init.rc
-    #mkdir /dev/socket/qmux_radio 0770 radio radio
-    #chmod 2770 /dev/socket/qmux_radio
-    #mkdir /dev/socket/qmux_audio 0770 media audio
-    #chmod 2770 /dev/socket/qmux_audio
-    #mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    #chmod 2770 /dev/socket/qmux_bluetooth
-    #mkdir /dev/socket/qmux_gps 0770 gps gps
-    #chmod 2770 /dev/socket/qmux_gps
 
-    setprop wifi.interface wlan0
+    # Create QMUX deamon socket area
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    chmod 2770 /dev/socket/qmux_radio
+    mkdir /dev/socket/qmux_audio 0770 media audio
+    chmod 2770 /dev/socket/qmux_audio
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    chmod 2770 /dev/socket/qmux_bluetooth
+    mkdir /dev/socket/qmux_gps 0770 gps gps
+    chmod 2770 /dev/socket/qmux_gps
 
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
-
-    setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
     chmod 4755 /system/bin/usbhub
@@ -207,20 +203,13 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
     
-    mkdir /data/misc/wifi/load 0775 system system
 
-    # DTS2013112400485 tiandazhang/00107790 20131125 begin
+
     mkdir /data/drm/rights 0770 drm drm
-    # DTS2013112400485 tiandazhang/00107790 20131125 end
-    #/* <DTS2012080201243 tiandazhang 20120802 begin */
     mkdir /data/drm/widevine 0770 drm drm
-    #/* DTS2012080201243 tiandazhang 20120802 end> */
-
-    # DTS2014081000069 wangyong/00205756 20140811 begin sync DTS2013082803931
     mkdir /data/midi
     chmod 0770 /data/midi
     chown media audio /data/midi
-    # DTS2014081000069 wangyong/00205756 20140811 end
 
     # NFC local data and nfcee xml storage
     # permissions for NFC
@@ -375,11 +364,6 @@ service ril-qmi /system/bin/sh /init.qcom.ril.sh
     user root
     oneshot
     
-service huaweibasebandinit /system/bin/sh /system/etc/init.huawei.baseband.sh
-    class late_start
-    user root
-    oneshot
-    
 service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     class main
     user root
@@ -409,6 +393,14 @@ service rmt_storage /sbin/rmt_storage
 
 on property:ro.boot.emmc=true
     start rmt_storage
+
+service rfs_access /system/bin/rfs_access
+   class core
+   user system
+   group system net_raw
+
+on property:ro.boot.emmc=true
+    start rfs_access
 
 
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
@@ -785,22 +777,6 @@ service profiler_daemon /system/bin/profiler_daemon
     user root
     group root
     disabled
-
-#service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
-#    class late_start
-#    disabled
-
-#on property:ro.fuse_sdcard=true
-#    start sdcard
-
-# Binding fuse mount point to /storage/emulated/legacy
-#on property:init.svc.sdcard=running
-#    wait /mnt/shell/emulated/0
-#    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
-
-# This will make sure that sdcard service starts as late_start.
-#on nonencrypted
-#    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
