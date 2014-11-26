@@ -35,7 +35,7 @@ media.stagefright.enable-fma2dp=true
 media.stagefright.enable-scan=true
 mmp.enable.3g2=true
 media.aac_51_output_enabled=true
-mm.enable.qcom_parser=37491
+mm.enable.qcom_parser=38655
 vidc.debug.level=1
 
 # Memory
@@ -48,6 +48,7 @@ ro.qualcomm.cabl=0
 
 
 # Telephony
+#rild.libpath=/system/lib/libreference-ril.so
 rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 persist.rild.nitz_plmn=

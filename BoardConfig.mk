@@ -42,7 +42,7 @@ TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 #TARGET_KERNEL_SOURCE := kernel/huawei/c8816
 #TARGET_KERNEL_CONFIG := c8816d_defconfig
 TARGET_KERNEL_SOURCE := kernel/huawei/g630
-TARGET_KERNEL_CONFIG := cm_msm8610-perf_defconfig
+TARGET_KERNEL_CONFIG := cm-c8816d_defconfig
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 androidboot.selinux=disable
 BOARD_KERNEL_BASE := 0x00000000
