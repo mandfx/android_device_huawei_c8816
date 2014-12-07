@@ -41,8 +41,8 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 #TARGET_KERNEL_SOURCE := kernel/huawei/c8816
 #TARGET_KERNEL_CONFIG := c8816d_defconfig
-TARGET_KERNEL_SOURCE := kernel/huawei/g630
-TARGET_KERNEL_CONFIG := cm-c8816d_defconfig
+TARGET_KERNEL_SOURCE := kernel/huawei/C8816D
+TARGET_KERNEL_CONFIG := c8816d_defconfig
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 androidboot.selinux=disable
 BOARD_KERNEL_BASE := 0x00000000
@@ -98,8 +98,13 @@ USE_OPENGL_RENDERER := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
-# Hardware tunables framework
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
+# CMHW
+ifneq ($(CM_VERSION),)
+    BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
+endif
+ifneq ($(MK_VERSION),)
+    BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw/
+endif
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -163,8 +168,3 @@ WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
 BOARD_WLAN_DEVICE := qcwcn
-
-
-# SELinux
-#BOARD_SEPOLICY_DIRS += \
-#    device/huawei/c8816/sepolicy

@@ -280,7 +280,7 @@ PRODUCT_PACKAGES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mass_storage,adb
+	persist.sys.usb.config=mass_storage
 
 # Enable strict operation
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -289,7 +289,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	 ro.secure=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1
+    persist.radio.apm_sim_not_pwdn=1 \
+    ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+
 	
 
 $(call inherit-product, build/target/product/full.mk)
