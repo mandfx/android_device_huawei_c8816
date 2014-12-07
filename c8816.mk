@@ -80,13 +80,6 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    librs_jni
-
 
 # HAL
 PRODUCT_PACKAGES += \
@@ -151,9 +144,6 @@ PRODUCT_PACKAGES += \
     ethertypes \
     libebtc
 
-# Filesystem tools
-PRODUCT_PACKAGES += \
-    setup_fs
 
 # Keystore
 #PRODUCT_PACKAGES += \
@@ -231,9 +221,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-# Vold
-PRODUCT_PACKAGES += \
-    vold.fstab
 
 # Thermald
 PRODUCT_COPY_FILES += \
@@ -242,7 +229,6 @@ PRODUCT_COPY_FILES += \
 # Spn config
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml \
-	$(LOCAL_PATH)/configs/cdma_call_conf.xml:system/etc/cdma_call_conf.xml \
 	$(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 	
 # Update-Binary
