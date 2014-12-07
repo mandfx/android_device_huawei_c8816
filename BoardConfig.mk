@@ -106,6 +106,12 @@ ifneq ($(MK_VERSION),)
     BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw/
 endif
 
+
+# Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_c8816.c
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
