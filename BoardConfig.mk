@@ -38,7 +38,7 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Inline kernel building
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
+#TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 #TARGET_KERNEL_SOURCE := kernel/huawei/c8816
 #TARGET_KERNEL_CONFIG := c8816d_defconfig
 TARGET_KERNEL_SOURCE := kernel/huawei/C8816D
@@ -55,7 +55,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 #	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
 #	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
 
-#TARGET_KERNEL_MODULES += WLAN_MODULES
+TARGET_KERNEL_MODULES += WLAN_MODULES
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
