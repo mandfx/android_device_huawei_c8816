@@ -65,11 +65,11 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.product.model", "C8816");
         property_set("ro.product.name", "C8816");
         property_set("ro.telephony.default_network", "4");
-        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("telephony.lteOnCdmaDevice", "0");
         property_set("ro.config.is_cdma_phone", "true");
         property_set("ro.cdma.home.operator.numeric", "46003");
         property_set("ro.config.cdma.globalMode", "true");
-        property_set("ro.com.android.dataroaming","true");
+        property_set("ro.com.android.dataroaming","false");
         property_set("ro.build.description", "C8816-user 4.4.4 GRJ90 C92B186 release-keys");
         property_set("ro.build.fingerprint", "Huawei/C8816/hwC8816:4.4.4/HuaweiC8816/C92B186:user/release-keys");
     }

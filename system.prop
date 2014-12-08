@@ -24,6 +24,8 @@ ro.telephony.default_network=4
 telephony.lteOnCdmaDevice=0
 persist.data_netmgrd_mtu=1460
 ro.telephony.call_ring.multiple=false
+ro.cdma.factory=china
+ro.cdma.home.operator.alpha=中国电信
 
 #
 # system props for the cne module
@@ -114,7 +116,7 @@ ro.qualcomm.cabl=0
 
 # Wifi
 wifi.interface=wlan0
-
+ro.sys.umsdirtyratio=20
 
 # system prop for NFC DT
 ro.nfc.port=I2C
@@ -124,9 +126,9 @@ ro.nfc.port=I2C
 #Specify max allowed resolution/bandwidth for representations
 #Set allowed avsync window during playback
 #
-persist.dash.max.rep.resolution=1280*720
-persist.dash.max.rep.bandwidth=4000000
-persist.dash.avsync.window.msec=100
+#persist.dash.max.rep.resolution=1280*720
+#persist.dash.max.rep.bandwidth=4000000
+#persist.dash.avsync.window.msec=100
 
 
 #the fucking huawei stuff
