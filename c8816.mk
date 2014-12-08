@@ -93,14 +93,13 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio_policy.msm8610 \
-    audio.primary.msm8610 \
+    audiod \
     audio.a2dp.default \
-    audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler \
-    libqcomvisualizer \
-    libqcomvoiceprocessing
+    audio.r_submix.default \
+    audio.primary.msm8610 \
+    audio_policy.msm8610 \
+    libaudio-resampler
 
 # Audio configuration file
 PRODUCT_COPY_FILES += \
@@ -244,9 +243,9 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,device/huawei/c8816/prebuilt/system,system)
 
 # Random
-#PRODUCT_PACKAGES += \
-#    qrngd \
-#    qrngp
+PRODUCT_PACKAGES += \
+    qrngd \
+    qrngp
 
 # Wifi
 PRODUCT_PACKAGES += \
