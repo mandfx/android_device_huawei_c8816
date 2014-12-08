@@ -41,8 +41,8 @@ debug.gralloc.map_fb_memory=0
 debug.hwc.dynThreshold=1.5
 
 # GPS
-ro.qc.sdk.izat.premium_enabled=1
-ro.qc.sdk.izat.service_mask=0x5
+ro.qc.sdk.izat.premium_enabled=0
+ro.qc.sdk.izat.service_mask=0x0
 persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
 
