@@ -1,10 +1,23 @@
+From 69ab6ab3e0db252bd872acd20179562be2520fa0 Mon Sep 17 00:00:00 2001
+From: mandfx <mandfx@qq.com>
+Date: Mon, 1 Dec 2014 23:12:24 +0800
+Subject: [PATCH] fix 8610 camera
+
+Change-Id: Id482b31f541e6065c6ec3953cb4ce82d1e75f6d7
+---
+ camera/CameraParameters.cpp                        | 6 ++++++
+ include/camera/CameraParameters.h                  | 5 +++++
+ media/libstagefright/AwesomePlayer.cpp             | 6 ------
+ services/camera/libcameraservice/CameraService.cpp | 9 +++++++++
+ 4 files changed, 20 insertions(+), 6 deletions(-)
+
 diff --git a/camera/CameraParameters.cpp b/camera/CameraParameters.cpp
-index 371729a..db36d41 100644
+index 03b22bd..66f43c2 100644
 --- a/camera/CameraParameters.cpp
 +++ b/camera/CameraParameters.cpp
-@@ -362,6 +362,12 @@ const char CameraParameters::SCENE_DETECT_ON[] = "on";
+@@ -393,6 +393,12 @@ const char CameraParameters::SCENE_DETECT_OFF[] = "off";
+ const char CameraParameters::SCENE_DETECT_ON[] = "on";
  #endif
- 
  
 +#ifdef HUAWEI_MSM8610_CAMERA
 +const char CameraParameters::SCENE_MODE_HWAUTO[] = "hwauto";
@@ -12,14 +25,14 @@ index 371729a..db36d41 100644
 +const char CameraParameters::KEY_QUCIK_SNAPSHOT_MODE[] = "key-qucik-snapshot-mode";
 +#endif
 +
+ 
  // Formats for setPreviewFormat and setPictureFormat.
  const char CameraParameters::PIXEL_FORMAT_YUV422SP[] = "yuv422sp";
- const char CameraParameters::PIXEL_FORMAT_YUV420SP[] = "yuv420sp";
 diff --git a/include/camera/CameraParameters.h b/include/camera/CameraParameters.h
-index 39ccef3..66b9c9b 100644
+index cff57d5..3570d13 100644
 --- a/include/camera/CameraParameters.h
 +++ b/include/camera/CameraParameters.h
-@@ -876,6 +876,11 @@ public:
+@@ -900,6 +900,11 @@ public:
      static const char SCENE_DETECT_OFF[];
      static const char SCENE_DETECT_ON[];
  #endif
@@ -32,14 +45,13 @@ index 39ccef3..66b9c9b 100644
      static const char PIXEL_FORMAT_YUV420SP[]; // NV21
  #ifdef QCOM_HARDWARE
 diff --git a/media/libstagefright/AwesomePlayer.cpp b/media/libstagefright/AwesomePlayer.cpp
-index 1fc5e59..4b494bd 100644
+index 1fc5e59..a28bbc7 100644
 --- a/media/libstagefright/AwesomePlayer.cpp
 +++ b/media/libstagefright/AwesomePlayer.cpp
-@@ -1348,13 +1348,6 @@ status_t AwesomePlayer::startAudioPlayer_l(bool sendErrorNotification) {
-         } else {
+@@ -1349,12 +1349,6 @@ status_t AwesomePlayer::startAudioPlayer_l(bool sendErrorNotification) {
              notifyIfMediaStarted_l();
          }
--
+ 
 -        // Kick off the text driver in audio in case we are playing an audio only file
 -        if ((mFlags & TEXTPLAYER_INITIALIZED)
 -                && !(mFlags & (TEXT_RUNNING | SEEK_PREVIEW))) {
@@ -50,10 +62,10 @@ index 1fc5e59..4b494bd 100644
          err = mAudioPlayer->resume();
      }
 diff --git a/services/camera/libcameraservice/CameraService.cpp b/services/camera/libcameraservice/CameraService.cpp
-index 994ce26..6c434a5 100644
+index fd9faa2..c15edc7 100644
 --- a/services/camera/libcameraservice/CameraService.cpp
 +++ b/services/camera/libcameraservice/CameraService.cpp
-@@ -1370,4 +1370,16 @@ ICameraServiceListener::Status CameraService::getStatus(int cameraId) const {
+@@ -1395,4 +1395,13 @@ ICameraServiceListener::Status CameraService::getStatus(int cameraId) const {
      return mStatusList[cameraId];
  }
  
@@ -66,7 +78,7 @@ index 994ce26..6c434a5 100644
 +{
 +}
 +#endif
-+
-+
-+
  }; // namespace android
+-- 
+1.9.1
+

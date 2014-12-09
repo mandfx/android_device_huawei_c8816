@@ -70,8 +70,6 @@ on post-fs-data
 on post-fs
     export LD_PRELOAD /vendor/lib/libNimsWrap.so
 	
-# vibrator intensity
-    chown system system /sys/devices/virtual/timed_output/vibrator/vtg_level
 
 # usb charging
 	chown system system /sys/class/power_supply/battery/charging_enabled

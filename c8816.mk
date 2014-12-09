@@ -224,9 +224,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/thermal-engine-8610.conf:system/etc/thermal-engine-8610.conf
     
 # Spn config
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml \
-	$(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
+#PRODUCT_COPY_FILES += \
+#	$(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml \
+#	$(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 	
 # Update-Binary
 PRODUCT_COPY_FILES += \
