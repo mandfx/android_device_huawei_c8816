@@ -62,10 +62,6 @@ on init
 
     chown system system /sys/module/mdss_dsi/parameters/dsi_status_disable
 
-#/* < DTS2014061400183 jingbing 20140614 start */
-    sys_wp_init_action
-#/* DTS2014061400183 jingbing 20140614 end > */
-
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -208,13 +204,20 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
     
-
-
-    mkdir /data/drm/rights 0770 drm drm
-    mkdir /data/drm/widevine 0770 drm drm
     mkdir /data/midi
     chmod 0770 /data/midi
     chown media audio /data/midi
+
+    mkdir /data/drm/rights 0770 drm drm
+    mkdir /data/drm/widevine 0770 drm drm
+    chown drm drm /data/drm
+    chmod 0770 /data/drm
+    chown drm drm /data/drm/rights
+    chmod 0770 /data/drm/rights
+    chown drm drm /data/drm/widevine
+    chmod 0770 /data/drm/widevine
+
+    sys_wp_init_action
 
     # NFC local data and nfcee xml storage
     # permissions for NFC
@@ -650,10 +653,6 @@ service wlan_detect /system/bin/wlan_detect
     user root
     group root
     oneshot
-
-service chargelog  /sbin/chargelog.sh 5 200000
-    class main
-    root charger
 
 service BtWiRfServer /system/xbin/RfTest
     user root

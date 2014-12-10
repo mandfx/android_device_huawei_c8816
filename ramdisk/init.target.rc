@@ -144,10 +144,6 @@ service wcnss-service /system/bin/wcnss_service
    group system wifi
    oneshot
 
-service huaweibasebandinit /system/bin/sh /system/etc/init.huawei.baseband.sh
-    class late_start
-    user root
-    oneshot
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
