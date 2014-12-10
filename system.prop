@@ -26,6 +26,8 @@ persist.data_netmgrd_mtu=1460
 ro.telephony.call_ring.multiple=false
 ro.cdma.factory=china
 ro.cdma.home.operator.alpha=中国电信
+persist.radio.apm_sim_not_pwdn=1
+ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
 #
 # system props for the cne module
@@ -113,6 +115,7 @@ ro.sys.fw.bg_apps_limit=20
 # Qualcomm
 ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 ro.qualcomm.cabl=0
+qcom.hw.aac.encoder=true
 
 # Wifi
 wifi.interface=wlan0

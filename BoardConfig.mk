@@ -18,6 +18,10 @@
 
 LOCAL_PATH := device/huawei/c8816
 
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := c8816,C8816,hwc8816,hwC8816,c8816d,C8816D,hwc8816d,hwC8816D
+
 # Platform
 TARGET_NO_BOOTLOADER := true
 

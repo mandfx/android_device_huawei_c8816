@@ -159,7 +159,15 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8610
+    gps.msm8610 \
+    libgps.utils \
+    libloc_adapter \
+    libloc_eng
+
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.gps.agps_provider=1 \
+    persist.gps.qc_nlp_in_use=0
 
 
 # Lights
@@ -270,10 +278,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.strict_op_enable=false \
     persist.sys.whitelist=/system/etc/whitelist_appops.xml \
 	 ro.secure=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1 \
-    ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
 	
 
