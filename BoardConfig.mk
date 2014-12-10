@@ -109,12 +109,12 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
 # CMHW
-ifneq ($(CM_VERSION),)
-    BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
-endif
-ifneq ($(MK_VERSION),)
-    BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw/
-endif
+#ifneq ($(CM_VERSION),)
+#    BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw/
+#endif
+#ifneq ($(MK_VERSION),)
+#    BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw/
+#endif
 
 
 # Init
