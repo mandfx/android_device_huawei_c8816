@@ -20,8 +20,6 @@ $(call inherit-product, vendor/cm/config/cdma.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit from c8816 device
 $(call inherit-product, device/huawei/c8816/c8816.mk)
