@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2013, The Linux Foundation. All rights reserved.
+   Copyright (c) 2014, The Linux Foundation. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -58,14 +58,14 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         if (strstr(model, "huawei_fac_product_name") != NULL)
             break;
 
-    property_set(PROP_LCDDENSITY, "240");
+
 
     /* C8816 */
     if (strstr(model, "C8816") != NULL) {
         property_set("ro.product.model", "C8816");
         property_set("ro.product.name", "C8816");
+    	  property_set(PROP_LCDDENSITY, "240");
         property_set("ro.config.is_cdma_phone", "true");
-        property_set("ro.cdma.home.operator.numeric", "46003");
         property_set("ro.config.cdma.globalMode", "true");
         property_set("ro.com.android.dataroaming","false");
         property_set("ro.build.description", "C8816-user 4.4.4 GRJ90 C92B186 release-keys");
@@ -75,8 +75,8 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     else if (strstr(model, "C8816D") != NULL) {
         property_set("ro.product.model", "C8816D");
         property_set("ro.product.name", "C8816D");
+		  property_set(PROP_LCDDENSITY, "240");
         property_set("ro.config.is_cdma_phone", "true");
-        property_set("ro.cdma.home.operator.numeric", "46003");
         property_set("ro.config.cdma.globalMode", "true");
         property_set("ro.com.android.dataroaming","false");
         property_set("persist.radio.multisim.config", "dsds");

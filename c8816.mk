@@ -46,6 +46,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
@@ -58,6 +59,10 @@ PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+
+# Sensors feature definition file/s
+PRODUCT_COPY_FILES += \
+   frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
 
 # Screen density
@@ -149,35 +154,20 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8610 \
-    libgps.utils \
-    libloc_adapter \
-    libloc_eng
-
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.gps.agps_provider=1 \
-    persist.gps.qc_nlp_in_use=0
+    gps.msm8610
 
 
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8610
 
-# Camera
+# Misc
 PRODUCT_PACKAGES += \
-	camera.msm8610
+    libxml2
 
-
-#OEM Services library
-PRODUCT_PACKAGES += \
-    oem-services \
-    libsubsystem_control \
-    libSubSystemShutdown
 
 # OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
     libdashplayer \
     libdivxdrmdecrypt \
     libmm-omxcore \
@@ -187,20 +177,16 @@ PRODUCT_PACKAGES += \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
     libOmxVdec \
-    libOmxVdecHevc \
     libOmxVenc \
     libstagefrighthw \
     qcmediaplayer
 
-PRODUCT_BOOT_JARS += \
-    qcmediaplayer
+PRODUCT_BOOT_JARS += qcmediaplayer
 
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8610 \
-    libcalmodule_akm \
-    calmodule.cfg
+    sensors.msm8610
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -271,7 +257,7 @@ PRODUCT_PACKAGES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mass_storage
+	persist.sys.usb.config=mass_storage,mtp
 
 # Enable strict operation
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

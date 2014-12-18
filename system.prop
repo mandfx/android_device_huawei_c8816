@@ -26,8 +26,9 @@ persist.data_netmgrd_mtu=1460
 ro.telephony.call_ring.multiple=false
 ro.cdma.factory=china
 ro.cdma.home.operator.alpha=中国电信
+ro.cdma.home.operator.numeric=中国电信
 persist.radio.apm_sim_not_pwdn=1
-ro.vendor.extension_library=/vendor/lib/libqc-opt.so
+ro.use_data_netmgrd=true
 
 #
 # system props for the cne module
@@ -51,6 +52,7 @@ persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
 
 dalvik.vm.heapsize=256m
+dalvik.vm.heapgrowthlimit=96m
 dev.pm.dyn_samplingrate=1
 
 ro.hdmi.enable=true
@@ -76,38 +78,17 @@ ro.ksm.default=1
 # system props for widevine
 #
 persist.gralloc.cp.level3=1
-
-#
-# system props for the data modules
-#
-ro.use_data_netmgrd=true
-
-#system props for time-services
 persist.timed.enable=true
-
-# simulate sdcard on /data/media
-#
 persist.fuse_sdcard=false
 
-#
-#snapdragon value add features
-#
-ro.qc.sdk.audio.ssr=false
 
 # Audio
+ro.qc.sdk.audio.ssr=false
 ro.qc.sdk.audio.fluencetype=none
 tunnel.audio.encode = false
-persist.audio.fluence.voicecall=true
-persist.audio.fluence.voicerec=false
-persist.audio.fluence.speaker=true
-use.voice.path.for.pcm.voip=true
-audio.offload.buffer.size.kb=32
-audio.offload.gapless.enabled=true
-audio.offload.disable=1
-audio.offload.multiple.enabled=false
-audio.offload.pcm.enable=false
-av.offload.enable=false
-av.streaming.offload.enable=false
+tunnel.audiovideo.decode=false
+rm.audio.exceptions = true
+audio.legacy.postproc=true
 
 # Reduce Background apps limit
 ro.sys.fw.bg_apps_limit=20
@@ -121,17 +102,6 @@ qcom.hw.aac.encoder=true
 wifi.interface=wlan0
 ro.sys.umsdirtyratio=20
 
-# system prop for NFC DT
-ro.nfc.port=I2C
-
-#
-#DASH video streaming
-#Specify max allowed resolution/bandwidth for representations
-#Set allowed avsync window during playback
-#
-#persist.dash.max.rep.resolution=1280*720
-#persist.dash.max.rep.bandwidth=4000000
-#persist.dash.avsync.window.msec=100
 
 
 #the fucking huawei stuff
@@ -143,3 +113,9 @@ ro.config.hw_camera_davinci=true
 ro.config.hw_camera_zsl=true
 ro.config.hw_camera_zsl_default=true
 ro.config.hw_camera_face_detection=true
+
+#bluetooth
+ro.qualcomm.bluetooth.ftp=true
+ro.qualcomm.bluetooth.sap=true
+ro.bluetooth.remote.autoconnect=true
+ro.bluetooth.request.master=true
