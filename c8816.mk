@@ -84,6 +84,13 @@ PRODUCT_PACKAGES += \
     power.msm8610 \
     liboverlay
 
+# Camera
+PRODUCT_PACKAGES += \
+    camera.msm8610 \
+    libqomx_core \
+	 libmmcamera_interface \
+    libmm-qcamera \
+    libmmjpeg_interface
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -138,8 +145,8 @@ PRODUCT_PACKAGES += \
 
 
 # Keystore
-#PRODUCT_PACKAGES += \
-#    keystore.msm8916
+PRODUCT_PACKAGES += \
+    keystore.qcom
 
 # FM radio
 PRODUCT_PACKAGES += \
@@ -153,8 +160,8 @@ PRODUCT_PACKAGES += \
     fstab.qcom
 
 # GPS
-PRODUCT_PACKAGES += \
-    gps.msm8610
+#PRODUCT_PACKAGES += \
+#    gps.msm8610
 
 
 # Lights
@@ -185,8 +192,8 @@ PRODUCT_BOOT_JARS += qcmediaplayer
 
 
 # Sensors
-PRODUCT_PACKAGES += \
-    sensors.msm8610
+#PRODUCT_PACKAGES += \
+#    sensors.msm8610
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
